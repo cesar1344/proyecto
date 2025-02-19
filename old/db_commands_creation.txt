@@ -1,0 +1,74 @@
+-- Creación de la tabla USUARIO
+CREATE TABLE USUARIO (
+    idusuario SERIAL PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    correo VARCHAR(100) UNIQUE NOT NULL,
+    contraseña VARCHAR(255) NOT NULL
+);
+
+-- Creación de la tabla DISEÑO
+CREATE TABLE DISENYO (
+    iddisenyo SERIAL PRIMARY KEY,
+    nombre VARCHAR(100),
+    nombredisenyo VARCHAR(100) NOT NULL,
+    descripción TEXT,
+    usuarioid INT NOT NULL,
+    FOREIGN KEY (usuarioid) REFERENCES USUARIO(idusuario) ON DELETE CASCADE
+);
+
+-- Creación de la tabla MENSAJE
+CREATE TABLE MENSAJE (
+    idmensaje SERIAL PRIMARY KEY,
+    contenido TEXT NOT NULL,
+    fechaenvio TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    usuarioid INT NOT NULL,
+    disenyoid INT NOT NULL,
+    FOREIGN KEY (usuarioid) REFERENCES USUARIO(idusuario) ON DELETE CASCADE,
+    FOREIGN KEY (disenyoid) REFERENCES DISENYO(iddisenyo) ON DELETE CASCADE
+);
+
+-- Creación de la tabla INFORME
+CREATE TABLE INFORME (
+    idinforme SERIAL PRIMARY KEY,
+    fechageneracion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    tipoinforme VARCHAR(50) NOT NULL,
+    contenido TEXT
+);
+
+-- Creación de la tabla PRODUCTO
+CREATE TABLE PRODUCTO (
+    idproducto SERIAL PRIMARY KEY,
+    nombreproducto VARCHAR(100) NOT NULL,
+    precio NUMERIC(10, 2) NOT NULL,
+    imagen TEXT,
+    stock INT NOT NULL,
+    iddisenyo INT,
+    FOREIGN KEY (iddisenyo) REFERENCES DISENYO(iddisenyo) ON DELETE SET NULL
+);
+
+-- Creación de la tabla PEDIDO
+CREATE TABLE PEDIDO (
+    idpedido SERIAL PRIMARY KEY,
+    fechapedido TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    estadopedido VARCHAR(50) NOT NULL,
+    usuarioid INT NOT NULL,
+    FOREIGN KEY (usuarioid) REFERENCES USUARIO(idusuario) ON DELETE CASCADE
+);
+
+-- Creación de la tabla DETALLE_PEDIDO
+CREATE TABLE DETALLE_PEDIDO (
+    iddetallepedido SERIAL PRIMARY KEY,
+    cantidad INT NOT NULL,
+    productoid INT NOT NULL,
+    pedidoid INT NOT NULL,
+    FOREIGN KEY (productoid) REFERENCES PRODUCTO(idproducto) ON DELETE CASCADE,
+    FOREIGN KEY (pedidoid) REFERENCES PEDIDO(idpedido) ON DELETE CASCADE
+);
+\d
+\d USUARIO
+\d DISENYO
+\d MENSAJE
+\d INFORME
+\d PRODUCTO
+\d PEDIDO
+\d DETALLE_PEDIDO
