@@ -22,7 +22,6 @@ def sql_lista_de_comandos(password, database_name, user, host, port, query, para
                 cursor.execute(query)
                 # Manejo especifico para diferentes tipos de consultas 
             query_upper = query.strip().upper()
-            
             if query_upper.startswith("SELECT"):
                 # Para consultas SELECT
                 query_data = cursor.fetchall()
