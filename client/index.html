@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./assets/css/styles.css">
+    <title>Stamp-Art</title>
+</head>
+
+<body>
+
+    <header>
+        <nav>
+            <h1>Stamp Art</h1>
+            <ul>
+                <li id="nuevo_usuario">Crear cuenta</li>
+                <li id="login">Login</li>
+                <li id="nueva_prenda">Crear prenda</li>
+
+            </ul>
+        </nav>
+
+    </header>
+
+    <section id="lastColection" class="container-section">
+        <div class="product" id="producto_1"
+            onclick="mostrarProducto('Camiseta estampada Vintage', '$19.99', 'rojo', 'Camiseta vintage roja con símbolo de paz blanco. Cómoda, duradera e ideal para un look casual con estilo.', './assets/img/camisetas/t-shirt_02.png')">
+            <img id="img_1" src="./assets/img/camisetas/t-shirt_02.png" alt="Camiseta Vintage">
+            <h3 id="titulo_1">Camiseta esta Vintage</h3>
+            <p id="descripcion_1">Camiseta Vintage</p>
+            <span id="precio_1">$19.99</span>
+        </div>
+
+        <div class="product" id="producto_2"
+            onclick="mostrarProducto('Camiseta Estampada Femenina', '$24.99', 'blanco', 'Camiseta estampada femenina con diseño moderno.', './assets/img/camisetas/t-shirt_07.png')">
+            <img id="img_2" src="./assets/img/camisetas/t-shirt_07.png" alt="Camiseta Estampada Femenina">
+            <h3 id="titulo_2">Camiseta Estampada Femenina</h3>
+            <p id="descripcion_2">Camiseta Estampada Femenina</p>
+            <span id="precio_2">$24.99</span>
+        </div>
+
+        <div class="product" id="producto_3"
+            onclick="mostrarProducto('Camiseta Estampada Masculina', '$15.49', 'negro', 'Camiseta estampada masculina ideal para un look casual.', './assets/img/camisetas/t-shirt_05.png')">
+            <img id="img_3" src="./assets/img/camisetas/t-shirt_05.png" alt="Camiseta Estampada Masculina">
+            <h3 id="titulo_3">Camiseta Estampada Masculina</h3>
+            <p id="descripcion_3">Camiseta Estampada Masculina</p>
+            <span id="precio_3">$15.49</span>
+        </div>
+
+        <div class="product" id="producto_4"
+            onclick="mostrarProducto('Camiseta Básica Femenina', '$29.99', 'rosa', 'Camiseta básica femenina de color rosa.', './assets/img/camisetas/t-shirt_10.png')">
+            <img id="img_4" src="./assets/img/camisetas/t-shirt_10.png" alt="Camiseta Básica Femenina">
+            <h3 id="titulo_4">Camiseta Básica Femenina</h3>
+            <p id="descripcion_4">Camiseta color rosa</p>
+            <span id="precio_4">$29.99</span>
+        </div>
+
+        <div class="product" id="producto_5"
+            onclick="mostrarProducto('Camiseta Básica Masculina', '$12.99', 'rojo', 'Camiseta básica masculina roja.', '../old/vista/Img/camiseta roja.webp')">
+            <img id="img_5" src="../old/vista/Img/camiseta roja.webp" alt="Camiseta Básica Masculina">
+            <h3 id="titulo_5">Camiseta Básica Masculina</h3>
+            <p id="descripcion_5">Camiseta Básica Masculina</p>
+            <span id="precio_5">$12.99</span>
+        </div>
+
+    <footer>
+        <h2>Sobre nosotros</h2>
+        <p>Somos una empresa comprometida con la calidad y el servicio al cliente. Ofrecemos soluciones innovadoras para
+            cada necesidad.</p>
+        <ul>
+            <li><a href="#">Términos y condiciones</a></li>
+            <li><a href="#">Política de privacidad</a></li>
+            <li><a href="#">Contacto 3104294889</a></li>
+        </ul>
+        <p>&copy; 2024 Mi Empresa. Todos los derechos reservados.</p>
+    </footer>
+
+    <script src="./assets/js/index.js"></script>
+    <script src="./assets/js/change_screen.js"></script>
+</body>
+
+</html>
