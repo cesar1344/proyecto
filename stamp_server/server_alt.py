@@ -1,53 +1,89 @@
-#import psycopg2
+import psycopg2
 from flask import Flask, jsonify, request
 from dotenv import load_dotenv
 import os
 from database_querys import sql_lista_de_comandos
 
-
 load_dotenv()
 # Parametros de conexión 
-password = os.environ.get("PASS")
-user = "postgres"
-dbname =  "stamp_art_db"
-host = "localhost" # la dirección IP de mi servidor
-port = "5432" # puerto por defecto del postgreSQL
-query = "SELECT * FROM usuario;"
-#db_test = sql_lista_de_comandos(password, dbname, user, host, port, query)
+password_sql = os.environ.get("PASS")
+user_sql = "postgres"
+dbname_sql =  "stamp_art_db"
+host_sql = "localhost" # la dirección IP de mi servidor
+port_sql = "5432" # puerto por defecto del postgreSQL
+#db_test = sql_lista_de_comandos(password_sql, dbname, user_sql, host_sql, port_sql, query)
 #print(db_test)
 
 app = Flask(__name__)
-port = 5000
+port = 8888
 
 @app.route('/')
 def hello():
-    return ''' 
-        el rey barbaro esta enojado 
-        '''
+    return '''    
+    el rey barbaro esta enojado 
+    '''
 
 @app.route('/info')
-def page_data():
+def info():
     return '''    
-        Stamp Arts 
-        '''
+    Stamp Arts 2025
+    '''
 
 # GET/Users - obtención de todos los usuarios.
 @app.route('/users', methods=['GET'])
-def ver_usuarios():
+def get_users():
     query = "SELECT * FROM usuario;"
-    usuarios = sql_lista_de_comandos(password, dbname, user, host, port, query)
-    if usuarios is None:
+    usuario = sql_lista_de_comandos(password_sql, dbname_sql, user_sql, host_sql, port_sql, query)
+    if usuario is None:
         return jsonify({"message": "No users found"}), 404
-    # Convertir los resultados a un formato JSON amigable
-    usuarios_list = []
-    for usuario in usuarios:
-        usuarios_list.append({
-            "idusuario": usuarios[0],
-            "nombre": usuarios[1],
-            "correo": usuarios[2],
-            "contrasenya": usuarios[3]  
-        })
-    return jsonify(usuarios), 200
+    '''
+    <h1>Lista de usuarios</h1>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Nombres de usuario</th>
+                <th>Email></th>
+                <th>Contraseña</th>
+            </tr>
+            {% for user in usuario %}
+            <tr>
+                <td>{{ user[0] }}</td>
+                <td>{{ user[1] }}</td>
+                <td>{{ user[2] }}</td>
+                <td>{{ user[4] }}</td>
+            </tr>
+                {% endfor %}
+        </table>
+    '''
+    return jsonify(usuario), 200
+
+# GET/Users - obtención de un usuario.
+@app.route('/users/<int:idusuario>', methods=['GET'])
+def get_one_user(idusuario):
+    query = "SELECT * FROM usuario WHERE idusuario = %s;"
+    usuario = sql_lista_de_comandos(password_sql, dbname_sql, user_sql, host_sql, port_sql, query, (idusuario,))
+    if usuario is None or len(usuario) < 1:
+        return jsonify({"message": "No users found"}), 404
+    '''
+    <h1>Lista de usuarios</h1>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Nombres de usuario</th>
+                <th>Email></th>
+                <th>Contraseña</th>
+            </tr>
+            {% for user in usuario %}
+            <tr>
+                <td>{{ user[0] }}</td>
+                <td>{{ user[1] }}</td>
+                <td>{{ user[2] }}</td>
+                <td>{{ user[4] }}</td>
+            </tr>
+                {% endfor %}
+        </table>
+    '''
+    return jsonify(usuario), 200
 
 #main
 if __name__ == '__main__':

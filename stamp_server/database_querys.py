@@ -2,16 +2,18 @@ import psycopg2
 from dotenv import load_dotenv
 import os
 
-def sql_lista_de_comandos(password, database_name, user, host, port, query, params=None):
+
+load_dotenv()
+def sql_lista_de_comandos(password, db_name, user, host, port, query, params=None):
     connection = None
     try:
         # Establecer la conexión 
-        connection = psycopg2.connect
-        dbname=database_name,
+        connection = psycopg2.connect(
+        dbname=dbname,
         user=user,
         password=password,
         host=host,
-        port=port
+        port=port) 
 
         # crear un curso para realizar operaciones en la base de datos 
         with connection.cursor() as cursor:
@@ -20,8 +22,9 @@ def sql_lista_de_comandos(password, database_name, user, host, port, query, para
                 cursor.execute(query,params)
             else:
                 cursor.execute(query)
-                # Manejo especifico para diferentes tipos de consultas 
+            # Manejo especifico para diferentes tipos de consultas 
             query_upper = query.strip().upper()
+            
             if query_upper.startswith("SELECT"):
                 # Para consultas SELECT
                 query_data = cursor.fetchall()
@@ -30,7 +33,7 @@ def sql_lista_de_comandos(password, database_name, user, host, port, query, para
             
             elif query_upper.startwith("INSERT"):
                 # Para consultas INSERT, especialmente con RETURING
-                connection.comit()
+                connection.commit()
 
                 # Verficar si hay una clausula RETURING
                 if "RETURNING" in query.upper():
@@ -61,4 +64,23 @@ def sql_lista_de_comandos(password, database_name, user, host, port, query, para
         if connection:
             connection.close()
             print("Conexión cerrada")
+
+
+# Parametros de conexión 
+password = os.environ.get("PASS")
+user = "postgres"
+dbname =  "stamp_art_db"
+host = "localhost" # o la dirección IP del servidor
+port = "5432" # puerto por defecto de postgreSQL
+query_simple = "SELECT * FROM usuario WHERE idusuario = 4;"
+# Llamar a la función con user_id especifico
+user_id = 8
+#result = sql_lista_de_comandos(password, dbname, user, host, port, query_simple)
+
+
+# Imprimir el resultado de la consulta 
+#print("resultado de la consulta", result, "tipo:", type,(result))
+
+
+
 
