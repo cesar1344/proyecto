@@ -1,0 +1,9 @@
+{
+  "version": "1",
+  "name": "test_api_stamp_art",
+  "type": "collection",
+  "ignore": [
+    "node_modules",
+    ".git"
+  ]
+}

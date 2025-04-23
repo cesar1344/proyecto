@@ -1,0 +1,19 @@
+meta {
+  name: ruta_crear_camiseta
+  type: http
+  seq: 8
+}
+
+post {
+  url: http://127.0.0.1:8888/crear_camiseta
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "nombre": "camiseta negra",
+    "descripcion":"camiseta azul con estampado nike",
+    "usuarioid": 2
+  }
+}

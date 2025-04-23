@@ -1,0 +1,17 @@
+meta {
+  name: eliminar_cuenta
+  type: http
+  seq: 6
+}
+
+delete {
+  url: http://192.168.10.209:8888/eliminar
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "idusuario": 4
+  }
+}

@@ -1,0 +1,15 @@
+meta {
+  name: cuenta
+  type: http
+  seq: 4
+}
+
+post {
+  url: http://192.168.10.209:8888/cuenta?idusuario=7
+  body: json
+  auth: inherit
+}
+
+params:query {
+  idusuario: 7
+}

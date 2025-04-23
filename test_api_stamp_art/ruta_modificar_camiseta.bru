@@ -1,0 +1,21 @@
+meta {
+  name: ruta_modificar_camiseta
+  type: http
+  seq: 9
+}
+
+put {
+  url: http://127.0.0.1:8888/modificar_camiseta
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "nombre": "camiseta amarilla",
+    "precio": 50000,
+    "imagen": "./carpetas/img.png",
+    "usuarioid": 5 
+    
+  }
+}

@@ -1,0 +1,19 @@
+meta {
+  name: nuevo_usuario
+  type: http
+  seq: 2
+}
+
+post {
+  url: http://192.168.10.209:8888/registro
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "nombre": "pakito",
+    "correo": "pakito@nekomail.com",
+    "contrasenya":"123456"
+  }
+}

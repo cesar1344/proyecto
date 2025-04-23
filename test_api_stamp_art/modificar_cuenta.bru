@@ -1,0 +1,20 @@
+meta {
+  name: modificar_cuenta
+  type: http
+  seq: 5
+}
+
+put {
+  url: http://127.0.0.1:8888/modificar
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "nombre": "Andres",
+    "idusuario": 5,
+    "email": "andres@1234mail.com",
+    "contrasenya": "12345"
+  }
+}
